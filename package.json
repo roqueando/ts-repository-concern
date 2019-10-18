@@ -1,0 +1,31 @@
+{
+  "name": "repository_api",
+  "version": "0.0.1",
+  "description": "A Restful API in TypeScript on Repository Pattern",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npx nodemon src/server.ts",
+    "build": "npx sucrase ./src -d ./dist --transforms typescripts,imports"
+  },
+  "author": "Vitor Roque",
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash": "^4.14.144",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-resource": "^1.0.0",
+    "pg": "^7.12.1",
+    "sequelize": "^5.19.6",
+    "sucrase": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.28",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.12",
+    "@types/sequelize": "^4.28.6",
+    "@types/validator": "^10.11.3",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}
