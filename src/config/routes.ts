@@ -10,7 +10,7 @@ export default class Routes {
     public userResource: any;
 
     public routes(app): void {
-        this.userResource = new Resource('users', this.userController, app);  
+        this.userResource = new Resource('users', this.userController, app);
           
     }
 }

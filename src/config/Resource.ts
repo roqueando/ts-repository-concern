@@ -1,56 +1,63 @@
-import _ from 'lodash';
-
 export default class Resource {
     public name: String;
     public controller: any;
     public app: any;
-    public actions: Array<string>;
+    public actions: object;
 
     public base: string;
     public param: string;
     public id: string;
     public objActions: any;
+    public pathname: string;
 
     constructor(name, controller, app) {
         this.name = name;
         this.controller = controller;
         this.app = app;
         this.base = '/';
-        this.actions = [
-            'index', // GET /
-            'store', // POST / 
-            'show', // GET /:id
-            'update', // PUT /:id
-            'delete' // DELETE /:id
-        ];
         if(this.base[this.base.length - 1] !== '/') this.base += '/';
+        this.pathname = `${this.base}${this.name}`;
         this.param = ':' + this.id;
-        this.actions.forEach(action => {
-            if(this.prototype[action]) this.mapFunctions(action, this.prototype[action]);
-        });
+
+      // index -> get
+      // store -> post
+      // show -> get
+      // update -> put
+      // delete -> delete
+
+        this.actions = {
+          index: {
+            path: this.pathname,
+            method: 'get',
+          },
+          store: {
+            path: this.pathname,
+            method: 'post',
+          },
+          show: {
+            path: `${this.pathname}/:id`,
+            method: 'get',
+          },
+          update: {
+            path: `${this.pathname}/:id`,
+            method: 'put',
+          },
+          delete: {
+            path: `${this.pathname}/:id`,
+            method: 'delete',
+          }
+         };
+
+       for (const action in this.actions) {
+         const actionMethod = this.actions[action].method;
+         const actionPath = this.actions[action].path;
+
+         this.app[actionMethod](actionPath, 
+            (request, response) => this.controller[action](request, response));
+       }
     }
 
     private get prototype(): any {
         return Object.getPrototypeOf(this.controller);
-    }
-
-    private mapFunctions(key, fn): void {
-        switch (key) {
-            case 'index':
-              this.app.get('/', fn);
-              break;
-            case 'store':
-              this.app.post('/', fn);
-              break;
-            case 'show':
-              this.app.get('/:id', fn);
-              break;
-            case 'update':
-              this.app.put('/:id', fn);
-              break;
-            case 'delete':
-              this.app.delete('/:id', fn);
-              break;
-          }
     }
 }
