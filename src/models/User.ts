@@ -1,8 +1,14 @@
-import {Sequelize, DataTypes, Model, BuildOptions} from 'sequelize';
+import {Table, Model, Column, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 
-export default class User extends Model {
-    public id!: number;
-    public name!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+// @Table
+export default class User extends Model<User> {
+    @Column public id!: number;
+    @Column public name!: string;
+    @Column public email!: string;
+
+    @CreatedAt
+    @Column public readonly createdAt!: Date;
+    
+    @UpdatedAt
+    @Column public readonly updatedAt!: Date;
 }

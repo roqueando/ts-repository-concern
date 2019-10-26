@@ -1,4 +1,4 @@
-import { Request, Response, RequestParamHandler } from 'express';
+import { Request, Response } from 'express';
 
 export default abstract class BaseController {
     public repository: any;

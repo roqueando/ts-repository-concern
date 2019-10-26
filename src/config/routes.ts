@@ -1,6 +1,3 @@
-// lib/config/routes.ts
-
-import { Request, Response } from 'express';
 import Resource from './Resource';
 import UserController from '../controllers/UserController';
 

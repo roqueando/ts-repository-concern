@@ -25,6 +25,8 @@ export default abstract class BaseRepository {
 
     async store(request, response){
         const obj = new this.model();
+        console.log(obj);
+        return response.status(201).json({ test: 'teste' });
         _.forEach(request.body, (value, field) => {
             obj[field] = value;
         });
