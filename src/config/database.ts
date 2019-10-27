@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize-typescript";
+import { Sequelize } from "sequelize";
 import User from '../models/User';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -10,4 +10,3 @@ export const sequelize = new Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
 });
-sequelize.addModels([User]);

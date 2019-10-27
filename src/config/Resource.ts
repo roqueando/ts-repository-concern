@@ -15,17 +15,35 @@ export default class Resource {
         this.controller = controller;
         this.app = app;
         this.base = '/';
-        if(this.base[this.base.length - 1] !== '/') this.base += '/';
-        this.pathname = `${this.base}${this.name}`;
+        this.setBase(this.base);
+        this.pathname = this.setPathname(this.base, this.name);
         this.param = ':' + this.id;
 
-      // index -> get
-      // store -> post
-      // show -> get
-      // update -> put
-      // delete -> delete
+        this.actions = this.getActions();
 
-        this.actions = {
+       for (const action in this.actions) {
+         const actionMethod = this.actions[action].method;
+         const actionPath = this.actions[action].path;
+
+         this.app[actionMethod](actionPath, 
+            (request, response) => this.controller[action](request, response));
+       }
+    }
+
+    private get prototype(): any {
+        return Object.getPrototypeOf(this.controller);
+    }
+
+    private setBase(base: String): String {
+      if(base[base.length - 1] !== '/') return base += '/';
+    }
+
+    private setPathname(base: String, name: String): string {
+      return `${base}${name}`;
+    }
+
+    private getActions(): Object {
+      return {
           index: {
             path: this.pathname,
             method: 'get',
@@ -46,18 +64,6 @@ export default class Resource {
             path: `${this.pathname}/:id`,
             method: 'delete',
           }
-         };
-
-       for (const action in this.actions) {
-         const actionMethod = this.actions[action].method;
-         const actionPath = this.actions[action].path;
-
-         this.app[actionMethod](actionPath, 
-            (request, response) => this.controller[action](request, response));
-       }
-    }
-
-    private get prototype(): any {
-        return Object.getPrototypeOf(this.controller);
+      };
     }
 }
