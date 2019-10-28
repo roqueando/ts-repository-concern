@@ -1,26 +1,20 @@
-import {Sequelize, Model, DataTypes, BuildOptions} from 'sequelize';
-import { sequelize } from '../config/database';
+import {Model, Table, Column, CreatedAt, UpdatedAt, PrimaryKey} from 'sequelize-typescript';
+import "reflect-metadata";
+
+@Table({
+	timestamps: true
+})
 export default class User extends Model<User> {
+    @PrimaryKey
+    @Column 
     public id!: number;
-    public name!: string;
-    public email!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    @Column public name!: string;
+    @Column public email!: string;
+
+    @CreatedAt 
+    @Column public readonly createdAt!: Date;
+
+    @UpdatedAt
+    @Column public readonly updatedAt!: Date;
 }
 
-User.init({
-	id: {
-		type: DataTypes.INTEGER,
-		autoIncrement: true,
-		primaryKey: true,
-	},
-	name: {
-		type: DataTypes.STRING
-	},
-	email: {
-		type: DataTypes.STRING,
-		unique: true
-	}
-}, {
-	sequelize
-});

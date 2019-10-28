@@ -4,7 +4,7 @@
   "description": "A Restful API in TypeScript on Repository Pattern",
   "main": "server.js",
   "scripts": {
-    "dev": "npx nodemon src/server.ts",
+    "dev": "npx ts-node-dev --respawn --transpileOnly ./src/server.ts",
     "build": "npx sucrase ./src -d ./dist --transforms typescripts,imports"
   },
   "author": "Vitor Roque",
@@ -19,7 +19,8 @@
     "sequelize": "^5.19.6",
     "sequelize-cli": "^5.5.1",
     "sequelize-typescript": "^1.0.0",
-    "sucrase": "^3.10.1"
+    "sucrase": "^3.10.1",
+    "typeorm": "^0.2.20"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.28",
@@ -30,6 +31,7 @@
     "@types/validator": "^10.11.3",
     "nodemon": "^1.19.4",
     "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.4"
   }
 }

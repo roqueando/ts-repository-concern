@@ -1,6 +1,6 @@
-import { Sequelize } from "sequelize";
-import User from '../models/User';
+import { Sequelize } from "sequelize-typescript";
 import dotenv from 'dotenv';
+import path from 'path';
 dotenv.config();
 
 export const sequelize = new Sequelize({
@@ -9,4 +9,6 @@ export const sequelize = new Sequelize({
     host: process.env.DB_HOST,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
+    models: [path.resolve('src', 'models')],
 });
+
