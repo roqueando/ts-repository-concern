@@ -20,7 +20,7 @@
     "sequelize-cli": "^5.5.1",
     "sequelize-typescript": "^1.0.0",
     "sucrase": "^3.10.1",
-    "typeorm": "^0.2.20"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.28",
