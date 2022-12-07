@@ -10,9 +10,9 @@
   "author": "Vitor Roque",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-resource": "^1.0.0",
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
